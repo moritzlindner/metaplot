@@ -2,7 +2,7 @@ Package: metaplot
 Title: Convenient plotting of meta-analysis data
 Version: 0.2
 Authors@R: person("Moritz", "Lindner", email = "lindnerm@uni-bonn.de", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Convenient plotting of meta-analysis data.
 Depends: R (>= 3.5.2)
 License: GPL-3
 Encoding: UTF-8

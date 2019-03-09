@@ -1,16 +1,16 @@
 
 #' Draws ROC curves for diagnostic accuracy studies
 #'
-#' This function creates a six column table of the format "median ( LCI - UCI )". Called by Forest_Plot
+#' This function creates an ROC plot. Returns or prints a ggplot object.
 #' @param source_tbl Dataframe containing the meta-analysis data
 #' @param study Index column for unique study identifier e.g. "Obelix 50 B.c."
 #' @param TP Column  name for column containing the True Positive values
 #' @param FN Column  name for column containing the False Negative values.
 #' @param FP Column  name for column containing the False Positive values.
 #' @param TN Column  name for column containing the True Negative values.
-#' @param group_var Column name for column containig group identifiers for subplots. Leave empty if not required.
-#' @param marker Column name for column containing values for marker size 
-#' @param colours List of colours for group_var. Standard is greyscale
+#' @param group_var Name of the column containig group identifiers for setting marker shape. Leave empty if not required.
+#' @param marker Name of the column containing values for setting marker size. Leave empty if not required.
+#' @param colours List of colours for group_var. Standard is greyscale.
 #' @param fontsize Font Size
 #' @param plabs Should each point be labled?
 #' @param axlabs X and Y axis lables, given as a list: c("X","Y")

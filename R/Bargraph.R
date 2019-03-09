@@ -24,6 +24,11 @@ Bargraph <- function(source_tbl,
   }else{
     source_tbl$markersize<-0.2
   }
+  
+  if (!is.null(group_var)){
+    source_tbl$group<-source_tbl[[group_var]]
+  }
+  
   bg<-ggplot2::ggplot(data=source_tbl,ggplot2::aes_string(y = study,x = median, xmin = lci, xmax = uci))+
     ggplot2::geom_point(ggplot2::aes(size=markersize),shape=18)+
     ggplot2::geom_errorbarh(height=0.5)+
@@ -36,6 +41,7 @@ Bargraph <- function(source_tbl,
           axis.line.x = ggplot2::element_line(size = 1, colour = "gray"),
           axis.ticks.x = ggplot2::element_line(size = 1, colour = "gray"),
           axis.ticks.y=ggplot2::element_blank(),
+          axis.title.x = ggplot2::element_text(size=8,face="bold"),
           #strip.background = ggplot2::element_blank(),
           #strip.text.y = ggplot2::element_text(angle = 180),
           strip.text.y = ggplot2::element_blank(),
@@ -43,7 +49,6 @@ Bargraph <- function(source_tbl,
     ggplot2::guides(x=ggplot2::element_blank())
   
   if (!is.null(group_var)){
-    source_tbl$group<-source_tbl[[group_var]]
     bg<-bg+ggplot2::facet_grid(group~., scales = "free", space = "free",switch = "y")
   }
   return(bg)

@@ -24,12 +24,16 @@ Number_Table <- function(source_tbl,
   df$open<- rep(" [",length(df[[study]]))
   df$to<- rep("-",length(df[[study]]))
   df$close<- rep("]",length(df[[study]]))
-  print(df)
   colnames(df)[1]<-"study"
   df<-tidyr::unite(df,"merge",c(median,"open", lci,"to",uci,"close"),sep="")
-  print(df)
+
+  if (!is.null(group_var)){
+    df$group<-df[[group_var]]
+  }
+  
   dftbl <- ggplot2::ggplot(df, ggplot2::aes(x = 1, y = as.factor(study), label = merge)) +
-    ggplot2::geom_text()+
+    ggfittext::geom_fit_text(size = 8, min.size = 0, reflow = T, place="left",height=1) + 
+    #ggplot2::geom_text(size = 1)+
     tbltheme+
     ggplot2::labs(x="",y="")+
     ggplot2::scale_size_identity()+
@@ -37,8 +41,6 @@ Number_Table <- function(source_tbl,
           strip.text.y = ggplot2::element_blank())
   
   if (!is.null(group_var)){
-    df$group<-df[[group_var]]
-    #dftbl<-dftbl+facet_wrap(~eval(group_var),ncol = 1)
     dftbl<-dftbl+ggplot2::facet_grid(group~., scales = "free", space = "free",switch = "y")
   }
   
