@@ -9,7 +9,7 @@
 #' @param uci Upper boundary of confidence interval
 #' @param round_digits Number of decimal places to display
 #' @export
-NULL
+#' @return none
 
 Number_Table <- function(source_tbl,
                          study,

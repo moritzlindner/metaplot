@@ -15,6 +15,8 @@
 #' @param plabs Should each point be labled?
 #' @param axlabs X and Y axis lables, given as a list: c("X","Y")
 #' @export
+#' @return none
+
 ROCplot <- function (source_tbl,
                      study,
                      TP="TP",

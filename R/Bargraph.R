@@ -9,7 +9,7 @@
 #' @param uci Upper boundary of confidence interval
 #' @param weightmark column with values for weightings
 #' @export
-NULL
+#' @return none
 
 Bargraph <- function(source_tbl,
                      study,

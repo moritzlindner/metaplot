@@ -6,7 +6,7 @@
 #' @param group_var Column to group by. Must be contained in \emph{disp_vars}.
 #' @param disp_vars List of columns to display
 #' @export
-NULL
+#' @return none
 
 Description_Table <- function(source_tbl, 
                               study,
