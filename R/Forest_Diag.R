@@ -20,7 +20,8 @@ Forest_Diag <- function(source_tbl,
                         spec_vars=c("spec", "spec.ci.lower", "spec.ci.upper"),
                         weightmark=NULL){
   if(!is.null(sort_var)){
-    source_tbl<-source_tbl[order(source_tbl[[sort_var]]),]
+    #source_tbl<-source_tbl[order(source_tbl[[sort_var]]),]
+    source_tbl[[study]] <- factor(source_tbl[[study]], levels = source_tbl[[study]][order(source_tbl[[sort_var]], decreasing = TRUE)])
   }
   if (is.null(disp_vars)){
     disp_vars<-study
