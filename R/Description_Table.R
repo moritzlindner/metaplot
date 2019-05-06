@@ -17,8 +17,13 @@ Description_Table <- function(source_tbl,
   }
   labtbl<-as.data.frame(source_tbl[,c(study,disp_vars)])
   colnames(labtbl)[1]<-"study"
+  print(labtbl)
   labtbl<-tidyr::gather(labtbl,key,value,-c("study",group_var))
-
+  print(labtbl)
+  
+  labtbl$key <- factor(labtbl$key, levels = disp_vars)
+  
+  
   if (!is.null(group_var)){
     labtbl$group<-labtbl[[group_var]]
     labtbl$group<-as.factor(labtbl$group)
