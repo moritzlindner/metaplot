@@ -29,7 +29,7 @@ ROCplot <- function (source_tbl,
                      fontsize=8,
                      plabs=TRUE,
                      axlabs=NULL){
-  dt<-dat1[,c(study,group_var,marker,TP,FN,FP,TN)]
+  dt<-source_tbl[,c(study,group_var,marker,TP,FN,FP,TN)]
   dt$sens<-dt[[TP]]/(dt[[TP]]+dt[[FN]])
   dt$fpr<-dt[[FP]]/(dt[[FP]]+dt[[TN]])
   
@@ -37,6 +37,7 @@ ROCplot <- function (source_tbl,
     group_var="group"
     dt[,group_var]<-TRUE
   }
+  dt[[group_var]]<-as.factor(dt[[group_var]])
   
   # calculate marker size
   if(is.null(marker)){
@@ -45,7 +46,6 @@ ROCplot <- function (source_tbl,
     dt[["marker"]]<-(dt[[marker]]/max(dt[[marker]])*5)+5
   }
   marker="marker"
-  print(dt)
   # make summary stats graph
   se<-NULL
   ii<-1
@@ -96,12 +96,21 @@ ROCplot <- function (source_tbl,
     }
     ii<-ii+1
   }
-  
+  sr$orig<-as.factor(sr$orig)
+  el$orig<-as.factor(el$orig)
+  se$orig<-as.factor(se$orig)
+  el$orig = factor(el$orig,levels(sr$orig))
+  se$orig = factor(se$orig,levels(sr$orig))
+  dt[[group_var]]= factor(dt[[group_var]],levels(sr$orig))
+  print(sr$orig)
+  print(se$orig)
+  print(el$orig)
+  print(dt[[group_var]])
   rocgraph <- ggplot2::ggplot(data=dt, ggplot2::aes_string(x = "fpr", y= "sens",colour=group_var,label=study))+
     ggplot2::geom_point(show.legend = FALSE,ggplot2::aes_string(size=marker), stroke = 0, shape = 20)+
     ggplot2::geom_line(inherit.aes = FALSE, data = sr, ggplot2::aes(x=fpr, y=V2, colour=orig),show.legend = FALSE)+
     ggplot2::geom_path(inherit.aes = FALSE, data = el, ggplot2::aes(x=V1, y=V2, colour=orig),show.legend = FALSE)+
-    ggplot2::geom_point(inherit.aes = FALSE, data = se, ggplot2::aes(x=fpr, y=sens, fill=orig),shape=24)+
+    ggplot2::geom_point(inherit.aes = FALSE, data = se, ggplot2::aes(x=fpr, y=sens, colour=orig, fill=orig),shape=24)+
     ggplot2::scale_colour_manual(values = colours)+
     ggplot2::scale_fill_manual(values = colours)+
     ggplot2::theme_minimal() +
