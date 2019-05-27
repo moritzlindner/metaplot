@@ -22,7 +22,7 @@ Bargraph <- function(source_tbl,
   if (!is.null(weightmark)){
     source_tbl$markersize<-scale(as.numeric(source_tbl[[weightmark]]), center=FALSE)
   }else{
-    source_tbl$markersize<-0.2
+    source_tbl$markersize<-1
   }
   
   if (!is.null(group_var)){
@@ -32,20 +32,29 @@ Bargraph <- function(source_tbl,
   bg<-ggplot2::ggplot(data=source_tbl,ggplot2::aes_string(y = study,x = median, xmin = lci, xmax = uci))+
     ggplot2::geom_point(ggplot2::aes(size=markersize),shape=18)+
     ggplot2::geom_errorbarh(height=0.5)+
-    ggplot2::xlab(type)+ ggplot2::ylab(" ")+
+    ggplot2::labs(x=type,y="")+
     ggplot2::scale_x_continuous(position = "top") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(plot.title=ggplot2::element_text(size=8,face="bold"),
-          axis.text.x = ggplot2::element_text(vjust=0),
+    ggplot2::theme_void() +
+    ggplot2::scale_size(range=c(2,4))+
+    ggplot2::theme(text = ggplot2::element_text(vjust=0,size=8,face="plain",
+                                       color="black",angle = 0, hjust=0, 
+                                       lineheight=20,margin=ggplot2::margin(t = 1, r = 1, b = 1, l = 1, unit = "pt")),
+          axis.text.x = ggplot2::element_text(size=8),
+          axis.title.x = ggplot2::element_text(size=8,face="bold", hjust=0.5),
           axis.text.y=ggplot2::element_blank(),
-          axis.line.x = ggplot2::element_line(size = 1, colour = "gray"),
-          axis.ticks.x = ggplot2::element_line(size = 1, colour = "gray"),
+          panel.grid.major.x = ggplot2::element_line(size = 0.5, colour = "gray",linetype = "solid",
+                                            lineend = "butt", arrow = NULL,
+                                            inherit.blank = FALSE),
+          axis.line.x = ggplot2::element_line(size = 1, colour = "gray",linetype = "solid",
+                                              lineend = "butt", arrow = NULL,
+                                              inherit.blank = FALSE),
+          axis.ticks.x = ggplot2::element_line(size = 2, colour = "gray",linetype = "solid",
+                                               lineend = "square", arrow = NULL,
+                                               inherit.blank = FALSE),
           axis.ticks.y=ggplot2::element_blank(),
-          axis.title.x = ggplot2::element_text(size=8,face="bold"),
-          #strip.background = ggplot2::element_blank(),
-          #strip.text.y = ggplot2::element_text(angle = 180),
           strip.text.y = ggplot2::element_blank(),
-          legend.position = "none")+
+          legend.position = "none",
+          plot.margin = ggplot2::unit(c(1, 1, 1, 1), "pt"))+
     ggplot2::guides(x=ggplot2::element_blank())
   
   if (!is.null(group_var)){

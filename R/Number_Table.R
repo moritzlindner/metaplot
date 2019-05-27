@@ -32,13 +32,15 @@ Number_Table <- function(source_tbl,
   }
   
   dftbl <- ggplot2::ggplot(df, ggplot2::aes(x = 1, y = as.factor(study), label = merge)) +
-    ggfittext::geom_fit_text(size = 8, min.size = 0, reflow = T, place="left",height=1) + 
-    #ggplot2::geom_text(size = 1)+
+    ggplot2::geom_text(size = 8/ggplot2:::.pt)+
     tbltheme+
     ggplot2::labs(x="",y="")+
     ggplot2::scale_size_identity()+
-    ggplot2::theme(axis.text.x = ggplot2::element_blank(),
-          strip.text.y = ggplot2::element_blank())
+    ggplot2::theme_void()+
+    ggplot2::theme( axis.text.x = ggplot2::element_blank(),
+          strip.text.y = ggplot2::element_blank(),
+          axis.ticks=ggplot2::element_blank(),
+          plot.margin = ggplot2::unit(c(1, 1, 1, 1), "pt"))
   
   if (!is.null(group_var)){
     dftbl<-dftbl+ggplot2::facet_grid(group~., scales = "free", space = "free",switch = "y")

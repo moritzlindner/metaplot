@@ -39,8 +39,9 @@ Forest_Diag <- function(source_tbl,
   ## this is the sensitivity table
   numspec<-Number_Table(source_tbl, round_digits=2, study,group_var=group_var, median=spec_vars[1],lci=spec_vars[2],uci=spec_vars[3])
   
-  sp<-cowplot::plot_grid(desc_tbl, barsens,numsens, barspec, numspec, ncol=5, rel_widths=c(length(disp_vars),1,0.5,1,0.5), align="h")
-  
+  relwidths<-c(1,(c(1,0.5,1,0.5)/3))
+  sp<-cowplot::plot_grid(desc_tbl, barsens,numsens, barspec, numspec, ncol=5, rel_widths=relwidths, align="h")+ggplot2::theme(plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+  sp$rows<-unique(source_tbl[[study]])
+  sp$minrecwidth<-desc_tbl$maxwidth/0.352778*(2/3)*0.1*2
   return(sp)
-  
 }
