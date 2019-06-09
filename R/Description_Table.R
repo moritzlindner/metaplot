@@ -18,14 +18,15 @@ Description_Table <- function(source_tbl,
   }
   labtbl<-as.data.frame(source_tbl[,c(study,disp_vars)])
   colnames(labtbl)[1]<-"study"
+  
   labtbl<-tidyr::gather(labtbl,key,value,-c("study",group_var))
   
   labtbl$key <- factor(labtbl$key, levels = disp_vars)
   labtbl<-data.table::as.data.table(labtbl)
-  labtbl<-labtbl[, width:=max(nchar(value)),by=key]
+  #labtbl<-labtbl[, width:=max(nchar(value)),by=key]
+  labtbl<-labtbl[, width:=(if(max(nchar(value))>max(nchar(as.character(key)))){max(nchar(value))}else{max(nchar(as.character(key)))}),by=key]
   labtbl<-as.data.frame(labtbl)
   #labtbl<-lapply(split(labtbl, labtbl$key), function(y) max(nchar(y$value)))
-  print(labtbl)
   if (!is.null(group_var)){
     labtbl$group<-labtbl[[group_var]]
     labtbl$group<-as.factor(labtbl$group)
@@ -40,7 +41,7 @@ Description_Table <- function(source_tbl,
       #labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-0
     }
   }
-  maxwidth<-max(labtbl$width)-min(labtbl$width)
+  
    for (i in length(levels(labtbl$key)):1){
      if (i>1){
        labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-labtbl$width[labtbl$key==levels(labtbl$key)[i-1]]
@@ -48,8 +49,10 @@ Description_Table <- function(source_tbl,
        labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-0
      }
    }
+  
+  maxwidth<-(max(labtbl$width)-min(labtbl$width))*1.1
+  
   data_table <- ggplot2::ggplot(labtbl, ggplot2::aes(x = width, y = study, label = format(value, nsmall = 1),width=width)) +
-    #ggplot2:: geom_tile(colour="black",fill="white")+
     ggplot2::geom_text(size = 8/ggplot2:::.pt, hjust=0)+
     ggplot2::scale_x_continuous(position = "top", limits=c(0,maxwidth),breaks = unique(labtbl$width),labels=levels(labtbl$key)) +
     tbltheme+
