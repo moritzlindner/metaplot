@@ -5,6 +5,7 @@
 #' @param study Index column for unique study identifier e.g. "Obelix 50 B.c."
 #' @param group_var Column to group by. Must be contained in \emph{disp_vars}.
 #' @param disp_vars List of columns to display
+#' @import data.table
 #' @export
 #' @return none
 
@@ -23,6 +24,8 @@ Description_Table <- function(source_tbl,
   labtbl<-data.table::as.data.table(labtbl)
   labtbl<-labtbl[, width:=max(nchar(value)),by=key]
   labtbl<-as.data.frame(labtbl)
+  #labtbl<-lapply(split(labtbl, labtbl$key), function(y) max(nchar(y$value)))
+  print(labtbl)
   if (!is.null(group_var)){
     labtbl$group<-labtbl[[group_var]]
     labtbl$group<-as.factor(labtbl$group)
