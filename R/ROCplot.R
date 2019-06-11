@@ -14,6 +14,7 @@
 #' @param fontsize Font Size
 #' @param plabs Should each point be labled?
 #' @param axlabs X and Y axis lables, given as a list: c("X","Y")
+#' @import ggplot2
 #' @export
 #' @return none
 
@@ -29,6 +30,7 @@ ROCplot <- function (source_tbl,
                      fontsize=8,
                      plabs=TRUE,
                      axlabs=NULL){
+  require(ggplot2)
   dt<-source_tbl[,c(study,group_var,marker,TP,FN,FP,TN)]
   dt$sens<-dt[[TP]]/(dt[[TP]]+dt[[FN]])
   dt$fpr<-dt[[FP]]/(dt[[FP]]+dt[[TN]])
