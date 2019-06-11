@@ -135,7 +135,7 @@ ROCplot <- function (source_tbl,
     rocgraph<-rocgraph+ggrepel::geom_label_repel(size=fontsize/ggplot2:::.pt, show.legend = FALSE, force=10)
   }
   if(!is.null(axlabs)){
-    rocgraph<-rocgraph+xlab(axlabs[1])+ylab(axlabs[2])
+    rocgraph<-rocgraph+ggplot2::xlab(axlabs[1])+ggplot2::ylab(axlabs[2])
   }
   
   
