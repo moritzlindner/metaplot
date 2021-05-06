@@ -4,9 +4,16 @@
 \alias{Bargraph}
 \title{Internal Function}
 \usage{
-Bargraph(source_tbl, study, group_var = NULL, type = "Sensitivity",
-  median = "sens", lci = "sens.ci.lower", uci = "sens.ci.upper",
-  weightmark = NULL)
+Bargraph(
+  source_tbl,
+  study,
+  group_var = NULL,
+  type = "Sensitivity",
+  median = "sens",
+  lci = "sens.ci.lower",
+  uci = "sens.ci.upper",
+  weightmark = NULL
+)
 }
 \arguments{
 \item{source_tbl}{Dataframe containing the meta-analysis data}

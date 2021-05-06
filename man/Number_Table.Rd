@@ -4,8 +4,15 @@
 \alias{Number_Table}
 \title{Internal Function}
 \usage{
-Number_Table(source_tbl, study, group_var = NULL, median = "sens",
-  lci = "sens.ci.lower", uci = "sens.ci.upper", round_digits = 2)
+Number_Table(
+  source_tbl,
+  study,
+  group_var = NULL,
+  median = "sens",
+  lci = "sens.ci.lower",
+  uci = "sens.ci.upper",
+  round_digits = 2
+)
 }
 \arguments{
 \item{source_tbl}{Dataframe containing the meta-analysis data}

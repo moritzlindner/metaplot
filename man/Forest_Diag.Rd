@@ -4,10 +4,16 @@
 \alias{Forest_Diag}
 \title{A forest plot for diagnostic accuracy studies}
 \usage{
-Forest_Diag(source_tbl, study, sort_var = NULL, group_var = NULL,
-  disp_vars = NULL, sens_vars = c("sens", "sens.ci.lower",
-  "sens.ci.upper"), spec_vars = c("spec", "spec.ci.lower",
-  "spec.ci.upper"), weightmark = NULL)
+Forest_Diag(
+  source_tbl,
+  study,
+  sort_var = NULL,
+  group_var = NULL,
+  disp_vars = NULL,
+  sens_vars = c("sens", "sens.ci.lower", "sens.ci.upper"),
+  spec_vars = c("spec", "spec.ci.lower", "spec.ci.upper"),
+  weightmark = NULL
+)
 }
 \arguments{
 \item{source_tbl}{Dataframe containing the meta-analysis data}

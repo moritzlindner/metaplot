@@ -10,6 +10,9 @@
 #' @param sens_vars Columns to use for Sensitivity Forest Plot (median,lci,uci)
 #' @param spec_vars Columns to use for Specificity Forest Plot (median,lci,uci)
 #' @param weightmark column with values for weightings
+#' @importFrom cowplot plot_grid
+#' @importFrom ggplot2 unit
+#' @importFrom ggplot2 theme
 #' @export
 Forest_Diag <- function(source_tbl,
                         study,
@@ -40,7 +43,7 @@ Forest_Diag <- function(source_tbl,
   numspec<-Number_Table(source_tbl, round_digits=2, study,group_var=group_var, median=spec_vars[1],lci=spec_vars[2],uci=spec_vars[3])
   
   relwidths<-c(1,(c(1,0.5,1,0.5)/3))
-  sp<-cowplot::plot_grid(desc_tbl, barsens,numsens, barspec, numspec, ncol=5, rel_widths=relwidths, align="h")+ggplot2::theme(plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+  sp<-plot_grid(desc_tbl, barsens,numsens, barspec, numspec, ncol=5, rel_widths=relwidths, align="h")+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
   sp$rows<-unique(source_tbl[[study]])
   sp$minrecwidth<-desc_tbl$maxwidth/0.352778*(2/3)*0.1*2
   return(sp)

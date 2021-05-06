@@ -4,8 +4,7 @@
 \alias{Description_Table}
 \title{Internal Function}
 \usage{
-Description_Table(source_tbl, study, group_var = NULL,
-  disp_vars = NULL)
+Description_Table(source_tbl, study, group_var = NULL, disp_vars = NULL)
 }
 \arguments{
 \item{source_tbl}{Dataframe containing the meta-analysis data}

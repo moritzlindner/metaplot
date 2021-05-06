@@ -7,6 +7,7 @@
 #' @param extension File extension, defining the file format.
 #' @param cm_per_row height of each row in cm.
 #' @param width witdth of graphics in cm; e.g  in MS Word, 15.5 cm would be a standard portrait width, and 25 cm a standard landscape width  
+#' @importFrom cowplot save_plot
 #' @export
 
 saveForest <- function(source_plot,filename,extension=".PDF",cm_per_row=1,width=25){
@@ -15,8 +16,7 @@ saveForest <- function(source_plot,filename,extension=".PDF",cm_per_row=1,width=
     warning(paste0("Print width is",width," cm andsmaller than recommended width for this plot (",source_plot$minrecwidth,")"))
   }
   width<-width/2.54
-  cowplot::save_plot(paste0(filename,"_",format(Sys.time(), "%Y%M%d_%H%M%S"),extension),source_plot,ncol=5,base_height=length(source_plot$rows)/2.54*cm_per_row,base_width=width/5)
-  cowplot::save_plot(paste0(filename,"_",format(Sys.time(), "%Y%M%d_%H%M%S"),".PDF"),source_plot,ncol=5,base_height=length(source_plot$rows)/2.54*cm_per_row,base_width=width/5)
-  #cowplot::save_plot(paste0(filename,"_",format(Sys.time(), "%Y%M%d_%H%M%S"),extension),source_plot,ncol=5,base_height=12,base_width=width/5)
+  save_plot(paste0(filename,"_",format(Sys.time(), "%Y%M%d_%H%M%S"),extension),source_plot,ncol=5,base_height=length(source_plot$rows)/2.54*cm_per_row,base_width=width/5)
+  save_plot(paste0(filename,"_",format(Sys.time(), "%Y%M%d_%H%M%S"),".PDF"),source_plot,ncol=5,base_height=length(source_plot$rows)/2.54*cm_per_row,base_width=width/5)
   
 }

@@ -4,9 +4,20 @@
 \alias{ROCplot}
 \title{Draws ROC curves for diagnostic accuracy studies}
 \usage{
-ROCplot(source_tbl, study, TP = "TP", FN = "FN", FP = "FP",
-  TN = "TN", group_var = NULL, marker = NULL, colours = NULL,
-  fontsize = 8, plabs = TRUE, axlabs = NULL)
+ROCplot(
+  source_tbl,
+  study,
+  TP = "TP",
+  FN = "FN",
+  FP = "FP",
+  TN = "TN",
+  group_var = NULL,
+  marker = NULL,
+  colours = NULL,
+  fontsize = 8,
+  plabs = TRUE,
+  axlabs = NULL
+)
 }
 \arguments{
 \item{source_tbl}{Dataframe containing the meta-analysis data}

@@ -8,6 +8,8 @@
 #' @param lci Lower boundary of confidence interval
 #' @param uci Upper boundary of confidence interval
 #' @param round_digits Number of decimal places to display
+#' @importFrom tidyr unite
+#' @import ggplot2
 #' @export
 #' @return none
 
@@ -25,7 +27,7 @@ Number_Table <- function(source_tbl,
   df$to<- rep("-",length(df[[study]]))
   df$close<- rep("]",length(df[[study]]))
   colnames(df)[1]<-"study"
-  df<-tidyr::unite(df,"merge",c(median,"open", lci,"to",uci,"close"),sep="")
+  df<-unite(df,"merge",c(median,"open", lci,"to",uci,"close"),sep="")
 
   if (!is.null(group_var)){
     df$group<-df[[group_var]]

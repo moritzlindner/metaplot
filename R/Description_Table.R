@@ -6,6 +6,8 @@
 #' @param group_var Column to group by. Must be contained in \emph{disp_vars}.
 #' @param disp_vars List of columns to display
 #' @import data.table
+#' @import ggplot2
+#' @importFrom tidyr gather
 #' @export
 #' @return none
 
@@ -19,7 +21,7 @@ Description_Table <- function(source_tbl,
   labtbl<-as.data.frame(source_tbl[,c(study,disp_vars)])
   colnames(labtbl)[1]<-"study"
   
-  labtbl<-tidyr::gather(labtbl,key,value,-c("study",group_var))
+  labtbl<-gather(labtbl,key,value,-c("study",group_var))
   
   labtbl$key <- factor(labtbl$key, levels = disp_vars)
   labtbl<-data.table::as.data.table(labtbl)
@@ -36,7 +38,6 @@ Description_Table <- function(source_tbl,
   for (i in 1:length(levels(labtbl$key))){
     if (i>1){
       labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-labtbl$width[labtbl$key==levels(labtbl$key)[i]]+unique(labtbl$width[labtbl$key==levels(labtbl$key)[i-1]])
-      #labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-labtbl$width[labtbl$key==levels(labtbl$key)[i+1]]
     }else{
       #labtbl$width[labtbl$key==levels(labtbl$key)[i]]<-0
     }

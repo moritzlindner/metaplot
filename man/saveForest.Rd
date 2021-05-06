@@ -4,8 +4,13 @@
 \alias{saveForest}
 \title{A function for convenient saveing of forest plot graphics}
 \usage{
-saveForest(source_plot, filename, extension = ".PDF", cm_per_row = 1,
-  width = 25)
+saveForest(
+  source_plot,
+  filename,
+  extension = ".PDF",
+  cm_per_row = 1,
+  width = 25
+)
 }
 \arguments{
 \item{source_plot}{ggplot object.}

@@ -8,6 +8,7 @@
 #' @param lci Lower boundary of confidence interval
 #' @param uci Upper boundary of confidence interval
 #' @param weightmark column with values for weightings
+#' @import ggplot2
 #' @export
 #' @return none
 
